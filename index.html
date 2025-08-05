@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蓝色梦幻花束</title>
+    <title>🌹 廖洁专属的蓝色梦幻花束 🌹</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        
         /* 全局背景和字体样式 */
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #a2c2e0, #f0f8ff);
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #a2c2e0 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,74 +21,351 @@
             justify-content: center;
             min-height: 100vh;
             text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* 动态背景渐变 */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 浮动的爱心动画 */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            position: relative;
+            z-index: 2;
         }
 
         /* 主标题样式 */
         h1 {
-            font-size: 3em;
-            color: #2c3e50;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 4em;
+            color: #fff;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.8);
+            }
         }
 
         /* 副标题样式 */
-        p {
-            font-size: 1.5em;
-            color: #34495e;
-            margin-bottom: 40px;
+        .subtitle {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 30px;
             font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* 视频容器样式 */
         .video-container {
-            border-radius: 15px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            background-color: white;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 20px;
             max-width: 90%;
-            margin: 0 auto;
+            margin: 20px auto;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         /* 视频样式 */
         video {
             max-width: 100%;
             height: auto;
+            border-radius: 15px;
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        /* 爱的宣言样式 */
+        .love-message {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: messageFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes messageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .love-message h2 {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .love-message p {
+            color: #fff;
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         /* 按钮样式 */
         .btn {
-            background-color: #3498db;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
-            padding: 10px 20px;
-            font-size: 1.2em;
+            padding: 15px 30px;
+            font-size: 1.3em;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 30px;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
         }
 
         .btn:hover {
-            background-color: #2980b9;
+            background: linear-gradient(45deg, #ff5252, #ff7979);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .subtitle { font-size: 1.5em; }
+            .love-message h2 { font-size: 2em; }
+            .love-message p { font-size: 1.1em; }
+        }
+
+        /* 星星背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
     </style>
 </head>
 <body>
-    <h1>蓝色梦幻花束</h1>
-    <p>送给我的无敌美丽的廖洁大美女！</p>
+    <!-- 星星背景 -->
+    <div class="stars" id="stars"></div>
     
-    <!-- 视频容器 -->
-    <div class="video-container">
-        <video width="800" controls preload="auto">
-            <source src="blue_bouquet.mp4" type="video/mp4">
-            <source src="blue_bouquet.webm" type="video/webm">
-            <source src="blue_bouquet.ogg" type="video/ogg">
-            你的浏览器不支持视频播放。
-        </video>
+    <!-- 浮动爱心 -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+    
+    <!-- 主内容 -->
+    <div class="main-content">
+        <h1>🌹 蓝色梦幻花束 🌹</h1>
+        <p class="subtitle">💝 献给我最珍贵的廖洁宝贝 💝</p>
+        
+        <!-- 视频容器 -->
+        <div class="video-container">
+            <video width="800" autoplay muted loop preload="auto" playsinline>
+                <source src="blue_bouquet.mp4" type="video/mp4">
+                <source src="blue_bouquet.webm" type="video/webm">
+                <source src="blue_bouquet.ogg" type="video/ogg">
+                你的浏览器不支持视频播放。
+            </video>
+        </div>
+        
+        <!-- 爱的宣言 -->
+        <div class="love-message">
+            <h2>💖 我的心里话 💖</h2>
+            <p>廖洁，你是我生命中最美的奇迹</p>
+            <p>就像这束蓝色花朵一样纯净而美丽</p>
+            <p>每一朵花都代表我对你深深的爱意</p>
+            <p>愿这份爱如花朵般永远绽放 🌸</p>
+            <p><strong>我爱你，现在，永远！</strong></p>
+        </div>
+        
+        <!-- 按钮区域 -->
+        <div>
+            <button class="btn" onclick="showSurprise()">💕 点击获得惊喜</button>
+            <button class="btn" onclick="location.reload();">🔄 重新开始</button>
+        </div>
     </div>
-    
-    <!-- 按钮 -->
-    <button class="btn" onclick="location.reload();">重新播放视频</button>
+
+    <script>
+        // 创建星星背景
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = '✨';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 创建浮动爱心
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floating-hearts');
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = Math.random() > 0.5 ? '💝' : '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+                
+                // 6秒后移除元素
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 6000);
+            }, 800);
+        }
+
+        // 惊喜功能
+        function showSurprise() {
+            const messages = [
+                "🌟 廖洁，你是我的小星星！",
+                "🌈 和你在一起的每一天都是彩虹色的！",
+                "🦋 你的笑容比花朵更美丽！",
+                "☀️ 你是我生命中的阳光！",
+                "🌙 晚安我的月亮，日安我的太阳！"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        }
+
+        // 优化视频播放
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createFloatingHearts();
+            
+            const video = document.querySelector('video');
+            if (video) {
+                // 降低视频质量以减少卡顿
+                video.addEventListener('loadstart', function() {
+                    // 可以在这里添加加载提示
+                });
+                
+                video.addEventListener('canplay', function() {
+                    // 视频可以播放时的处理
+                    this.play().catch(e => console.log('自动播放被阻止'));
+                });
+            }
+        });
+
+        // 点击页面任意位置创建爱心特效
+        document.addEventListener('click', function(e) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'fixed';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.color = '#ff69b4';
+            heart.style.fontSize = '20px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.animation = 'heartPop 1s ease-out forwards';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 1000);
+        });
+
+        // 添加心形点击动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes heartPop {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.2);
+                }
+                100% {
+                    transform: scale(0) translateY(-50px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
