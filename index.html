@@ -8,14 +8,14 @@
         /* 全局背景和字体样式 */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #a2c2e0, #f0f8ff); /* 渐变背景色 */
+            background: linear-gradient(45deg, #a2c2e0, #f0f8ff);
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
         }
 
@@ -46,6 +46,12 @@
             margin: 0 auto;
         }
 
+        /* 视频样式 */
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+
         /* 按钮样式 */
         .btn {
             background-color: #3498db;
@@ -70,13 +76,15 @@
     
     <!-- 视频容器 -->
     <div class="video-container">
-        <video width="800" controls>
-            <source src="blue_bouquet.mp4" type="mp4">
+        <video width="800" controls preload="auto">
+            <source src="blue_bouquet.mp4" type="video/mp4">
+            <source src="blue_bouquet.webm" type="video/webm">
+            <source src="blue_bouquet.ogg" type="video/ogg">
             你的浏览器不支持视频播放。
         </video>
     </div>
     
     <!-- 按钮 -->
-    <button class="btn" onclick="window.location.reload();">重新播放视频</button>
+    <button class="btn" onclick="location.reload();">重新播放视频</button>
 </body>
 </html>
