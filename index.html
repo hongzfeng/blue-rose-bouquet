@@ -4,13 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>蓝色梦幻花束</title>
+    <style>
+        /* 全局背景和字体样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #a2c2e0, #f0f8ff); /* 渐变背景色 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* 主标题样式 */
+        h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        /* 副标题样式 */
+        p {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        /* 视频容器样式 */
+        .video-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            padding: 20px;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
     <h1>蓝色梦幻花束</h1>
     <p>送给我的无敌美丽的廖洁大美女！</p>
-    <video width="800" controls>
-        <source src="blue_bouquet.mp4" type="video/mp4">
-        你的浏览器不支持视频播放。
-    </video>
+    
+    <!-- 视频容器 -->
+    <div class="video-container">
+        <video width="800" controls>
+            <source src="blue_bouquet.mp4" type="video/mp4">
+            你的浏览器不支持视频播放。
+        </video>
+    </div>
+    
+    <!-- 按钮 -->
+    <button class="btn" onclick="window.location.reload();">重新播放视频</button>
 </body>
 </html>
