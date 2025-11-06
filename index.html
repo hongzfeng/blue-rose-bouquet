@@ -185,12 +185,56 @@
             transform: translateY(-1px);
         }
 
+        /* 浪漫消息卡片样式 */
+        .romantic-message {
+            position: fixed;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.95), rgba(255, 218, 224, 0.95));
+            border: 3px solid rgba(255, 105, 180, 0.8);
+            border-radius: 20px;
+            padding: 20px 30px;
+            font-size: 1.2em;
+            color: #d63384;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
+            z-index: 9999;
+            opacity: 0;
+            animation: fadeInOut 4s ease-in-out forwards;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+            max-width: 300px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            15% {
+                opacity: 1;
+                transform: scale(1.1) rotate(2deg);
+            }
+            85% {
+                opacity: 1;
+                transform: scale(1) rotate(-1deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8) rotate(5deg);
+            }
+        }
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             h1 { font-size: 2.5em; }
             .subtitle { font-size: 1.5em; }
             .love-message h2 { font-size: 2em; }
             .love-message p { font-size: 1.1em; }
+            .romantic-message {
+                font-size: 1em;
+                padding: 15px 20px;
+                max-width: 200px;
+            }
         }
 
         /* 星星背景 */
@@ -250,12 +294,106 @@
         
         <!-- 按钮区域 -->
         <div>
-            <button class="btn" onclick="showSurprise()">💕 点击获得惊喜</button>
+            <button class="btn" onclick="showRomanticSurprise()">💕 点击获得惊喜</button>
             <button class="btn" onclick="location.reload();">🔄 重新开始</button>
         </div>
     </div>
 
     <script>
+        // 浪漫的话语库
+        const romanticMessages = [
+            "💖 廖洁，遇见你是我最美的意外",
+            "🌟 你的笑容照亮了我的整个世界",
+            "🌹 每一次心跳都在为你而跳动",
+            "💝 你是我今生最美的风景",
+            "✨ 和你在一起，时间都变得温柔",
+            "🦋 你的温柔让我沉醉其中",
+            "🌈 因为有你，我的世界五彩斑斓",
+            "💫 你是我心中永恒的星光",
+            "🌸 每个日出都因你而美丽",
+            "💗 我想把世界上最好的都给你",
+            "🎀 你的声音是世界上最动听的旋律",
+            "🌺 愿做你永远的守护者",
+            "💕 你是我心中唯一的答案",
+            "🌙 想和你一起数星星到天明",
+            "☀️ 你是我生命中最温暖的阳光",
+            "🎁 每一天和你在一起都是礼物",
+            "🍀 遇见你是我最大的幸运",
+            "💓 我的心里只有你的位置",
+            "🌻 你的笑容比花儿还要灿烂",
+            "🎈 想和你一起走过四季轮回",
+            "🌊 你是我生命中最美的浪花",
+            "🔮 愿用一生守护你的笑容",
+            "🎵 你是我心中最美的乐章",
+            "🍓 你的甜蜜让我心醉神迷",
+            "🎪 和你的每一刻都是狂欢",
+            "🌴 想和你一起去看世界的美好",
+            "💎 你比宝石更加珍贵",
+            "🎨 你为我的生命涂上了色彩",
+            "🎭 在你面前，我只想做真实的自己",
+            "🌿 你是我心中永不凋零的春天",
+            "🔥 你点燃了我生命的热情",
+            "❄️ 即使冰天雪地，有你就温暖",
+            "🌾 想和你一起慢慢变老",
+            "🎯 你是我人生的目标和方向",
+            "🗝️ 你打开了我心灵的那扇门",
+            "📖 你是我生命中最美的故事",
+            "🎬 想和你一起演绎浪漫人生",
+            "🏰 你就是我心中的公主",
+            "👑 愿为你戴上最美的皇冠",
+            "💌 每一天都想对你说一万次我爱你"
+        ];
+
+        // 生成爱心轨迹的坐标点
+        function getHeartPath(centerX, centerY, scale = 1) {
+            const points = [];
+            const numPoints = 40; // 爱心轨迹上的点数
+            
+            for (let i = 0; i < numPoints; i++) {
+                const t = (i / numPoints) * 2 * Math.PI;
+                // 心形曲线参数方程
+                const x = centerX + scale * 16 * Math.pow(Math.sin(t), 3);
+                const y = centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+                points.push({ x, y });
+            }
+            
+            return points;
+        }
+
+        // 显示浪漫惊喜
+        function showRomanticSurprise() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const scale = Math.min(window.innerWidth, window.innerHeight) / 40;
+            
+            // 获取爱心轨迹点
+            const heartPoints = getHeartPath(centerX, centerY, scale);
+            
+            // 随机打乱消息顺序
+            const shuffledMessages = [...romanticMessages].sort(() => Math.random() - 0.5);
+            
+            // 在爱心轨迹上显示消息
+            heartPoints.forEach((point, index) => {
+                setTimeout(() => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'romantic-message';
+                    messageDiv.textContent = shuffledMessages[index % shuffledMessages.length];
+                    messageDiv.style.left = point.x + 'px';
+                    messageDiv.style.top = point.y + 'px';
+                    messageDiv.style.transform = 'translate(-50%, -50%)';
+                    
+                    document.body.appendChild(messageDiv);
+                    
+                    // 4秒后移除消息
+                    setTimeout(() => {
+                        if (messageDiv.parentNode) {
+                            messageDiv.parentNode.removeChild(messageDiv);
+                        }
+                    }, 4000);
+                }, index * 100); // 每个消息延迟100ms出现
+            });
+        }
+
         // 创建星星背景
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -293,20 +431,6 @@
             }, 800);
         }
 
-        // 惊喜功能
-        function showSurprise() {
-            const messages = [
-                "🌟 廖洁，你是我的小星星！",
-                "🌈 和你在一起的每一天都是彩虹色的！",
-                "🦋 你的笑容比花朵更美丽！",
-                "☀️ 你是我生命中的阳光！",
-                "🌙 晚安我的月亮，日安我的太阳！"
-            ];
-            
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            alert(randomMessage);
-        }
-
         // 优化视频播放
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
@@ -314,13 +438,11 @@
             
             const video = document.querySelector('video');
             if (video) {
-                // 降低视频质量以减少卡顿
                 video.addEventListener('loadstart', function() {
                     // 可以在这里添加加载提示
                 });
                 
                 video.addEventListener('canplay', function() {
-                    // 视频可以播放时的处理
                     this.play().catch(e => console.log('自动播放被阻止'));
                 });
             }
