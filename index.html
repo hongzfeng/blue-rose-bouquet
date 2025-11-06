@@ -191,36 +191,37 @@
             background: linear-gradient(135deg, rgba(255, 182, 193, 0.95), rgba(255, 218, 224, 0.95));
             border: 3px solid rgba(255, 105, 180, 0.8);
             border-radius: 20px;
-            padding: 20px 30px;
-            font-size: 1.2em;
+            padding: 15px 20px;
+            font-size: 1em;
             color: #d63384;
             box-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
             z-index: 9999;
             opacity: 0;
-            animation: fadeInOut 4s ease-in-out forwards;
+            animation: fadeInOut 5s ease-in-out forwards;
             text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
             font-weight: bold;
-            max-width: 300px;
+            max-width: 250px;
             text-align: center;
             backdrop-filter: blur(10px);
+            pointer-events: none;
         }
 
         @keyframes fadeInOut {
             0% {
                 opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
+                transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
             }
             15% {
                 opacity: 1;
-                transform: scale(1.1) rotate(2deg);
+                transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
             }
             85% {
                 opacity: 1;
-                transform: scale(1) rotate(-1deg);
+                transform: translate(-50%, -50%) scale(1) rotate(-1deg);
             }
             100% {
                 opacity: 0;
-                transform: scale(0.8) rotate(5deg);
+                transform: translate(-50%, -50%) scale(0.8) rotate(5deg);
             }
         }
 
@@ -231,9 +232,9 @@
             .love-message h2 { font-size: 2em; }
             .love-message p { font-size: 1.1em; }
             .romantic-message {
-                font-size: 1em;
-                padding: 15px 20px;
-                max-width: 200px;
+                font-size: 0.85em;
+                padding: 12px 15px;
+                max-width: 180px;
             }
         }
 
@@ -344,17 +345,19 @@
             "💌 每一天都想对你说一万次我爱你"
         ];
 
-        // 生成爱心轨迹的坐标点
+        // 生成爱心轨迹的坐标点（修正版）
         function getHeartPath(centerX, centerY, scale = 1) {
             const points = [];
             const numPoints = 40; // 爱心轨迹上的点数
             
             for (let i = 0; i < numPoints; i++) {
-                const t = (i / numPoints) * 2 * Math.PI;
-                // 心形曲线参数方程
+                const t = (i / numPoints) * Math.PI * 2;
+                
+                // 心形曲线参数方程（修正版，确保正确显示）
                 const x = centerX + scale * 16 * Math.pow(Math.sin(t), 3);
                 const y = centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-                points.push({ x, y });
+                
+                points.push({ x: x, y: y });
             }
             
             return points;
@@ -364,7 +367,9 @@
         function showRomanticSurprise() {
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-            const scale = Math.min(window.innerWidth, window.innerHeight) / 40;
+            
+            // 根据屏幕大小调整爱心大小
+            const scale = Math.min(window.innerWidth, window.innerHeight) / 50;
             
             // 获取爱心轨迹点
             const heartPoints = getHeartPath(centerX, centerY, scale);
@@ -378,19 +383,20 @@
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'romantic-message';
                     messageDiv.textContent = shuffledMessages[index % shuffledMessages.length];
+                    
+                    // 直接使用计算好的坐标
                     messageDiv.style.left = point.x + 'px';
                     messageDiv.style.top = point.y + 'px';
-                    messageDiv.style.transform = 'translate(-50%, -50%)';
                     
                     document.body.appendChild(messageDiv);
                     
-                    // 4秒后移除消息
+                    // 5秒后移除消息
                     setTimeout(() => {
                         if (messageDiv.parentNode) {
                             messageDiv.parentNode.removeChild(messageDiv);
                         }
-                    }, 4000);
-                }, index * 100); // 每个消息延迟100ms出现
+                    }, 5000);
+                }, index * 120); // 每个消息延迟120ms出现
             });
         }
 
